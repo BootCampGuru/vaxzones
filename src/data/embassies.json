@@ -1,0 +1,24 @@
+﻿[
+    {
+        "Status": "Active",
+        "Bureau": "AF",
+        "Country": "Cote d'Ivoire",
+        "Post": "Abidjan",
+        "Property_Name": "CHANCERY",
+        "Property Use": "OFFOBC",
+        "Ownership Type ": "X",
+        "Property ID": "15001",
+        "Real Property Unique ID": "35300115001",
+        "Street_Address_1": "LOT 19605,  RIVIERA  GOLF",
+        "Street Address 2": "COCODY",
+        "latitude": "40.853570",
+        "longitude": "-73.863260",
+        "Date First Acq": "10/9/05",
+        "Funding Agency": "STATE-OBO PROGRAM",
+        "Languages": "[English, French]", 
+        "Funding": 20, 
+        "confirmed": 21,
+        "deaths": 20,
+        "recovered" : 10
+    }
+]
