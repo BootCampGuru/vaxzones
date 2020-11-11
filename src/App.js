@@ -9,17 +9,33 @@ import 'react-slideshow-image/dist/styles.css'
 import {Form, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col} from 'reactstrap'
 import { Map, TileLayer, Marker, Popup,GeoJSON,Circle,Tooltip } from 'react-leaflet'
 import './App.css';
-import data from './data/diplomacy.json'
-import travel from './data/travel_advisory.json'
-import worldmap from './data/world_map.json'
+//import data from './data/diplomacy.json'
+//import travel from './data/travel_advisory.json'
+//import worldmap from './data/world_map.json'
+
+//import virus_apr_data from './data/virus_data.json'
+
+//import virus_jun_data from './data/virus_data.json'
+
+//import virus_aug_data from './data/virus_data.json'
+/*
 import virus_data from './data/virus_data.json'
 import virus_mar_data from './data/virus_mar_data.json'
-import virus_apr_data from './data/virus_data.json'
 import virus_may_data from './data/virus_may_data.json'
-import virus_jun_data from './data/virus_data.json'
 import virus_jul_data from './data/virus_jul_data.json'
-import virus_aug_data from './data/virus_data.json'
 import virus_sep_data from './data/virus_sep_data.json'
+import virus_oct_data from './data/virus_data.json'
+import virus_nov_data from './data/virus_nov_data.json'
+import testing_data from './data/testing_data.json'
+import hospital_list from './data/hospital_list.json'
+import nursing_bronx from './data/nursing_bronx.json'
+import COVID_19_Manhattan from './data/COVID_19_Manhattan.json' */
+
+import virus_data from './data/virus_data.json'
+import virus_mar_data from './data/virus_mar_data.json'
+import virus_may_data from './data/virus_data.json'
+import virus_jul_data from './data/virus_aug_data.json'
+import virus_sep_data from './data/virus_data.json'
 import virus_oct_data from './data/virus_data.json'
 import virus_nov_data from './data/virus_nov_data.json'
 import testing_data from './data/testing_data.json'
@@ -71,6 +87,7 @@ var circle = L.circle([51.508, -0.11], {
 class App extends Component {
 
 
+
   getNursingAidCircle = (value) => 
   {
     if(isNaN(value) == true || value == null)
@@ -89,6 +106,42 @@ class App extends Component {
   else 
   {
     color = 'red';
+  }
+  
+  return color
+  
+  }
+
+  getHospitalAidRadius = (value) => {
+
+    var radius = 500;
+    if(isNaN(value) == true || value == null)
+    {
+      return 0;
+    }
+   
+    return radius;
+  }
+
+
+  getHospitalAidCircle = (value) => 
+  {
+    if(isNaN(value) == true || value == null)
+    {
+      return 'black';
+    }
+    var color = 'black';
+  
+  value = parseInt(value);
+  
+  if(value < 1)
+  {
+    color = 'brown'
+  }
+
+  else 
+  {
+    color = 'blue';
   }
   
   return color
@@ -157,6 +210,27 @@ class App extends Component {
     return radius;
   }
 
+  onClickedUp = () =>
+  {
+    if(parseInt(this.state.value) === 11)
+    return;
+    console.log(this.state.value);
+    this.setState({value: parseInt(this.state.value) + 4});
+    this.onValueChangedButton(parseInt(this.state.value) + 4);
+    console.log(this.state.value);
+  }
+
+ 
+  onClickedDown =() =>
+  {
+    if(parseInt(this.state.value) === 3)
+    return;
+    console.log(this.state.value);
+    this.setState({value: parseInt(this.state.value) - 4 });
+    this.onValueChangedButton(parseInt(this.state.value) - 4);
+    console.log(this.state.value);
+  }
+
   onSelectionChanged = (event) => {
     var value = event.target.value;
 
@@ -169,8 +243,79 @@ class App extends Component {
         rows.push({"key": filter_history[i].Test_Date,
           "data" : parseInt(filter_history[i].Total_Number_of_Tests_Performed)});
       };
-      //console.log(rows);
+ 
       this.setState({all_testing_data: rows});
+
+  }
+
+  onValueChangedButton = (value) => {
+    
+  
+    if(value == 3)
+    {
+      var filter_data= virus_mar_data.filter(function (pilot) {
+        return pilot.province_state == "New York";
+      });
+
+      this.setState({virus_data: filter_data});
+    }
+     else if(value== 4)
+    {
+      /*
+      var filter_data= virus_apr_data.filter(function (pilot) {
+        return pilot.province_state == "New York";
+      });
+      this.setState({virus_data: filter_data});*/
+    }
+         else if(value == 5)
+    {
+      var filter_data= virus_may_data.filter(function (pilot) {
+        return pilot.province_state == "New York";
+      });
+      this.setState({virus_data: filter_data});
+    }
+            else if(value == 6)
+    {
+     /* var filter_data= virus_jun_data.filter(function (pilot) {
+        return pilot.province_state == "New York";
+      });
+      this.setState({virus_data: filter_data});*/
+    }
+    else if(value== 7)
+    {
+      var filter_data= virus_jul_data.filter(function (pilot) {
+        return pilot.province_state == "New York";
+      });
+      this.setState({virus_data: filter_data});
+    }
+      else if(value == 8)
+    {
+     /* var filter_data= virus_aug_data.filter(function (pilot) {
+        return pilot.province_state == "New York";
+      });
+      this.setState({virus_data: filter_data});*/
+    }
+        else if(value == 9)
+    {
+      var filter_data= virus_sep_data.filter(function (pilot) {
+        return pilot.province_state == "New York";
+      });
+      this.setState({virus_data: filter_data});
+    }
+    else if(value == 10)
+    {
+      /*var filter_data= virus_oct_data.filter(function (pilot) {
+        return pilot.province_state == "New York";
+      });
+      this.setState({virus_data: filter_data});*/
+    }
+    else
+    {
+      var filter_data= virus_nov_data.filter(function (pilot) {
+        return pilot.province_state == "New York";
+      });
+      this.setState({virus_data: filter_data});
+    }
 
   }
 
@@ -187,10 +332,10 @@ class App extends Component {
     }
      else if(event.target.value == 4)
     {
-      var filter_data= virus_apr_data.filter(function (pilot) {
+     /* var filter_data= virus_apr_data.filter(function (pilot) {
         return pilot.province_state == "New York";
       });
-      this.setState({virus_data: filter_data});
+      this.setState({virus_data: filter_data});*/
     }
          else if(event.target.value == 5)
     {
@@ -201,10 +346,10 @@ class App extends Component {
     }
             else if(event.target.value == 6)
     {
-      var filter_data= virus_jun_data.filter(function (pilot) {
+     /* var filter_data= virus_jun_data.filter(function (pilot) {
         return pilot.province_state == "New York";
       });
-      this.setState({virus_data: filter_data});
+      this.setState({virus_data: filter_data});*/
     }
     else if(event.target.value == 7)
     {
@@ -215,10 +360,10 @@ class App extends Component {
     }
       else if(event.target.value == 8)
     {
-      var filter_data= virus_aug_data.filter(function (pilot) {
+    /*  var filter_data= virus_aug_data.filter(function (pilot) {
         return pilot.province_state == "New York";
       });
-      this.setState({virus_data: filter_data});
+      this.setState({virus_data: filter_data});*/
     }
         else if(event.target.value == 9)
     {
@@ -229,10 +374,10 @@ class App extends Component {
     }
     else if(event.target.value == 10)
     {
-      var filter_data= virus_oct_data.filter(function (pilot) {
+     /* var filter_data= virus_oct_data.filter(function (pilot) {
         return pilot.province_state == "New York";
       });
-      this.setState({virus_data: filter_data});
+      this.setState({virus_data: filter_data});*/
     }
     else
     {
@@ -246,8 +391,8 @@ class App extends Component {
 
   state={
     location: {
-      lat: 40.853570,
-      lng: -73.863260,
+      lat: 40.766505,
+      lng: -73.877285,
       },
     zoom: 10,
     all_testing_data:[
@@ -256,9 +401,9 @@ class App extends Component {
     value:3,
     virus_data: virus_data,
     virus_mar_data: virus_mar_data,
-    virus_apr_data: virus_apr_data,
+    //virus_apr_data: virus_apr_data,
     virus_may_data: virus_may_data,
-    virus_jun_data: virus_jun_data,
+    //virus_jun_data: virus_jun_data,
     virus_jul_data: virus_jul_data,
     virus_sep_data: virus_sep_data,
     virus_oct_data: virus_oct_data,
@@ -267,7 +412,9 @@ class App extends Component {
     hospital_list: hospital_list,
     nursing_bronx: nursing_bronx,
     COVID_19_Manhattan: COVID_19_Manhattan,
-    show_wildlife: true
+    show_wildlife: true,
+    show_bronx: false,
+    show_manhattan: false
   }
 
   getHospitalIcon = (score) =>
@@ -278,22 +425,22 @@ class App extends Component {
  
    var greenIcon = L.divIcon({
      className : 'div-green-icon',
-     html: '<span style="color: white; background-color: green; font-size: 14px;">' + score + '<img width="16px" src="/vaczones/images/building_icon.png"/></span>'
+     html: '<span style="color: white; background-color: green; font-size: 14px;">' + score + '<img width="16px" src="/vaxzones/images/building_icon.png"/></span>'
    })
  
    var yellowIcon = L.divIcon({
      className : 'div-yellow-icon',
-     html: '<span style="color: black; background-color: yellow; font-size: 14px;">' + score + '<img width="16px" src="/vaczones/images/google_icon.png"/></span>'
+     html: '<span style="color: black; background-color: yellow; font-size: 14px;">' + score + '<img width="16px" src="/vaxzones/images/google_icon.png"/></span>'
    })
  
    var orangeIcon = L.divIcon({
      className : 'div-orange-icon',
-     html: '<span style="color: black; background-color: orange; font-size: 14px;">' + score + '<img width="16px" src="/vaczones/images/google_icon.png"/></span>'
+     html: '<span style="color: black; background-color: orange; font-size: 14px;">' + score + '<img width="16px" src="/vaxzones/images/google_icon.png"/></span>'
    })
  
    var redIcon = L.divIcon({
      className : 'div-red-icon',
-     html: '<span style="color: white; background-color: red; font-size: 14px;">' + score + '<img width="16px" src="/vaczones/images/google_icon.png"/></span>'
+     html: '<span style="color: white; background-color: red; font-size: 14px;">' + score + '<img width="16px" src="/vaxzones/images/google_icon.png"/></span>'
    })
  
    var emptyIcon = L.divIcon({
@@ -317,22 +464,22 @@ class App extends Component {
  
    var greenIcon = L.divIcon({
      className : 'div-green-icon',
-     html: '<span style="color: white; background-color: green; font-size: 14px;">' + score + '<img width="16px" src="/vaczones/images/google_icon.png"/></span>'
+     html: '<span style="color: white; background-color: green; font-size: 14px;">' + score + '<img width="16px" src="/vaxzones/images/google_icon.png"/></span>'
    })
  
    var yellowIcon = L.divIcon({
      className : 'div-yellow-icon',
-     html: '<span style="color: black; background-color: yellow; font-size: 14px;">' + score + '<img width="16px" src="/vaczones/images/google_icon.png"/></span>'
+     html: '<span style="color: black; background-color: yellow; font-size: 14px;">' + score + '<img width="16px" src="/vaxzones/images/google_icon.png"/></span>'
    })
  
    var orangeIcon = L.divIcon({
      className : 'div-orange-icon',
-     html: '<span style="color: black; background-color: orange; font-size: 14px;">' + score + '<img width="16px" src="/vaczones/images/google_icon.png"/></span>'
+     html: '<span style="color: black; background-color: orange; font-size: 14px;">' + score + '<img width="16px" src="/vaxzones/images/google_icon.png"/></span>'
    })
  
    var redIcon = L.divIcon({
      className : 'div-red-icon',
-     html: '<span style="color: white; background-color: red; font-size: 14px;">' + score + '<img width="16px" src="/vaczones/images/google_icon.png"/></span>'
+     html: '<span style="color: white; background-color: red; font-size: 14px;">' + score + '<img width="16px" src="/vaxzones/images/google_icon.png"/></span>'
    })
  
    var emptyIcon = L.divIcon({
@@ -345,6 +492,16 @@ class App extends Component {
  
    return greenIcon;
  
+  }
+
+  onBrooklynChanged= (event) => {
+   
+    this.setState({show_bronx: event.target.checked});
+  }
+
+  onManhattanChanged= (event) => {
+   
+    this.setState({show_manhattan: event.target.checked});
   }
 
 
@@ -365,22 +522,22 @@ class App extends Component {
 
   var greenIcon = L.divIcon({
     className : 'div-green-icon',
-    html: '<span style="color: white; background-color: green; font-size: 14px;">' + score + '<img width="16px" src="/vaczones/images/google_icon.png"/></span>'
+    html: '<span style="color: white; background-color: green; font-size: 14px;">' + score + '<img width="16px" src="/vaxzones/images/google_icon.png"/></span>'
   })
 
   var yellowIcon = L.divIcon({
     className : 'div-yellow-icon',
-    html: '<span style="color: black; background-color: yellow; font-size: 14px;">' + score + '<img width="16px" src="/vaczones/images/google_icon.png"/></span>'
+    html: '<span style="color: black; background-color: yellow; font-size: 14px;">' + score + '<img width="16px" src="/vaxzones/images/google_icon.png"/></span>'
   })
 
   var orangeIcon = L.divIcon({
     className : 'div-orange-icon',
-    html: '<span style="color: black; background-color: orange; font-size: 14px;">' + score + '<img width="16px" src="/vaczones/images/google_icon.png"/></span>'
+    html: '<span style="color: black; background-color: orange; font-size: 14px;">' + score + '<img width="16px" src="/vaxzones/images/google_icon.png"/></span>'
   })
 
   var redIcon = L.divIcon({
     className : 'div-red-icon',
-    html: '<span style="color: white; background-color: red; font-size: 14px;">' + score + '<img width="16px" src="/vaczones/images/google_icon.png"/></span>'
+    html: '<span style="color: white; background-color: red; font-size: 14px;">' + score + '<img width="16px" src="/vaxzones/images/google_icon.png"/></span>'
   })
 
   var emptyIcon = L.divIcon({
@@ -479,11 +636,20 @@ fetch("https://covid19.cloudeya.org/MAR2020", requestOptions)
   return (
     <div className="App">
      <br/>
-     <h3>Pandemic Detection over Time</h3>
+     <h3>Covid-19 Detection over Time</h3>
+     <button  onClick={this.onClickedUp}>Up</button> <button onClick={this.onClickedDown}>Down</button>
    <RangeSlider min={3} max={11}
-   value={this.state.value} step={2}
+   value={this.state.value} step={4}
    onChange={this.onValueChanged} />
-
+<br/>
+<div style={{padding:'10px'}}>
+<span><b>Health Care Data</b></span>
+<br/>
+<span style={{padding:'10px'}}><Input  onChange={this.onManhattanChanged} id="manhattan" value="Manhattan" checked={this.state.show_manhattan} type="checkbox" />
+<label htmlFor="manhattan">Manhattan</label> </span>
+<span style={{padding:'10px'}}><Input  onChange={this.onBrooklynChanged} id="bronx" value="Bronx" checked={this.state.show_bronx} type="checkbox" />
+<label htmlFor="bronx">Bronx</label> </span>
+</div>
       <Map id="map" className="map" center={position} zoom={this.state.zoom}>
         <TileLayer noWrap="true"
           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -508,10 +674,10 @@ this.state.virus_data.map((each, index) => {
 
 
         {
-this.state.show_wildlife ? 
+this.state.show_bronx ? 
 
 this.state.nursing_bronx.map((each, index) => {
-      console.log(each.longitude)
+     
           if (isNaN(each.longitude) === false && isNaN(each.latitude) === false && each.latitude != null && each.longitude != null) {
   
         var position=[each.latitude, each.longitude]
@@ -528,10 +694,10 @@ this.state.nursing_bronx.map((each, index) => {
 
 
         {
-this.state.show_wildlife ? 
+this.state.show_manhattan ? 
 
 this.state.COVID_19_Manhattan.map((each, index) => {
-      console.log(each.longitude)
+      
           if (isNaN(each.longitude) === false && isNaN(each.latitude) === false && each.latitude != null && each.longitude != null) {
   
         var position=[each.latitude, each.longitude]
@@ -547,17 +713,19 @@ this.state.COVID_19_Manhattan.map((each, index) => {
         } 
 
         {
-this.state.show_wildlife ? 
+this.state.show_manhattan ? 
 
 this.state.hospital_list.map((each, index) => {
-      console.log(each.location_1.longitude)
+     
           if (isNaN(each.location_1.longitude) === false && isNaN(each.location_1.latitude) === false && each.location_1.latitude != null && each.location_1.longitude != null) {
   
         var position=[each.location_1.latitude, each.location_1.longitude]
         return <Marker key={index} position={position} icon={this.getHospitalIcon(each.death)}>
-         <Popup><br /> 
-          {each.facility_name}<br />  
-          </Popup>
+        <Circle 
+                  center={{lat:each.location_1.latitude, lng: each.location_1.longitude}}
+                  fillColor={this.getHospitalAidCircle(each.death)} 
+                  fillOpacity = {1}
+                  radius={this.getNursingAidRadius(5)}><Tooltip>{"Deaths: " + each.death +  " Deaths: " + each.borough +  " Address: " + each.facility_name}</Tooltip></Circle> 
       </Marker>
       }})
 : ''
@@ -582,7 +750,7 @@ this.state.virus_data.map((each, index) => {
 
         }
         </Map>
-        <h3>Testing Data</h3>
+        <h3>Covid Testing Data by Burrough</h3>
         <select onChange={this.onSelectionChanged} name="counties" id="counties">
       <option value="New York">Manhattan</option>
       <option value="Bronx">Bronx</option>
@@ -595,7 +763,7 @@ this.state.virus_data.map((each, index) => {
 <BarChart width={1000} height={250} data={this.state.all_testing_data} />
     </Col>
     <Col sm={{ size: 5, offset: 1 }}>
-    <img alt="chart" src="/vaczones/images/population.png" height="200px" />
+    <img alt="chart" src="/vaxzones/images/population.png" height="200px" />
     </Col>
     </Row>
 
