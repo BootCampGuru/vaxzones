@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/vaxzones/precache-manifest.ee8b59ce4bee506e40ad6916ae99cbc3.js"
+  "/vaxzones/precache-manifest.130f1ae3d23b39192f0d54cb5318562c.js"
 );
 
 self.addEventListener('message', (event) => {
