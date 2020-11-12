@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/vaxzones/static/css/main.12f022f3.chunk.css",
-    "main.js": "/vaxzones/static/js/main.ac2ba43c.chunk.js",
-    "main.js.map": "/vaxzones/static/js/main.ac2ba43c.chunk.js.map",
+    "main.js": "/vaxzones/static/js/main.6df5df38.chunk.js",
+    "main.js.map": "/vaxzones/static/js/main.6df5df38.chunk.js.map",
     "runtime-main.js": "/vaxzones/static/js/runtime-main.eac8f144.js",
     "runtime-main.js.map": "/vaxzones/static/js/runtime-main.eac8f144.js.map",
     "static/css/2.27d5846e.chunk.css": "/vaxzones/static/css/2.27d5846e.chunk.css",
     "static/js/2.bbdaf8a6.chunk.js": "/vaxzones/static/js/2.bbdaf8a6.chunk.js",
     "static/js/2.bbdaf8a6.chunk.js.map": "/vaxzones/static/js/2.bbdaf8a6.chunk.js.map",
     "index.html": "/vaxzones/index.html",
-    "precache-manifest.7c5e2b97bcb4ba397e2b294467d4110e.js": "/vaxzones/precache-manifest.7c5e2b97bcb4ba397e2b294467d4110e.js",
+    "precache-manifest.598b755ff224bfe1cf01caf23cadd961.js": "/vaxzones/precache-manifest.598b755ff224bfe1cf01caf23cadd961.js",
     "service-worker.js": "/vaxzones/service-worker.js",
     "static/css/2.27d5846e.chunk.css.map": "/vaxzones/static/css/2.27d5846e.chunk.css.map",
     "static/css/main.12f022f3.chunk.css.map": "/vaxzones/static/css/main.12f022f3.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.27d5846e.chunk.css",
     "static/js/2.bbdaf8a6.chunk.js",
     "static/css/main.12f022f3.chunk.css",
-    "static/js/main.ac2ba43c.chunk.js"
+    "static/js/main.6df5df38.chunk.js"
   ]
 }
