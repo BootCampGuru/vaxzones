@@ -630,24 +630,25 @@ fetch("https://covid19.cloudeya.org/MAR2020", requestOptions)
   }
 
 
+
   render(){
 
     const position=[this.state.location.lat, this.state.location.lng]
   return (
     <div className="App">
      <br/>
-     <h3>Covid-19 Detection over Time</h3>
-     <button  onClick={this.onClickedUp}>Up</button> <button onClick={this.onClickedDown}>Down</button>
+     <h3>Covid-19 Health Care Worker tracking for VAD program</h3>
+     <button style={{backgroundColor: 'red'}}  onClick={this.onClickedUp}>Up</button> <button style={{backgroundColor: 'red'}} onClick={this.onClickedDown}>Down</button>
    <RangeSlider min={3} max={11}
    value={this.state.value} step={4}
    onChange={this.onValueChanged} />
 <br/>
-<div style={{padding:'10px'}}>
+<div style={{padding:'20px'}}>
 <span><b>Health Care Data</b></span>
 <br/>
-<span style={{padding:'10px'}}><Input  onChange={this.onManhattanChanged} id="manhattan" value="Manhattan" checked={this.state.show_manhattan} type="checkbox" />
+<span style={{padding:'10px'}}><Input style={{backgroundColor: 'red'}}  onChange={this.onManhattanChanged} id="manhattan" value="Manhattan" checked={this.state.show_manhattan} type="checkbox" />
 <label htmlFor="manhattan">Manhattan</label> </span>
-<span style={{padding:'10px'}}><Input  onChange={this.onBrooklynChanged} id="bronx" value="Bronx" checked={this.state.show_bronx} type="checkbox" />
+<span style={{padding:'10px'}}><Input style={{backgroundColor: 'green'}} onChange={this.onBrooklynChanged} id="bronx" value="Bronx" checked={this.state.show_bronx} type="checkbox" />
 <label htmlFor="bronx">Bronx</label> </span>
 </div>
       <Map id="map" className="map" center={position} zoom={this.state.zoom}>
@@ -713,7 +714,7 @@ this.state.COVID_19_Manhattan.map((each, index) => {
         } 
 
         {
-this.state.show_manhattan ? 
+this.state.show_manhattan_hospitals ? 
 
 this.state.hospital_list.map((each, index) => {
      
@@ -759,16 +760,24 @@ this.state.virus_data.map((each, index) => {
       </select>
       <hr/>
       <Row>
-      <Col sm={{ size: 6}}>
+      <Col sm={{ size: 5}}>
 <BarChart width={1000} height={250} data={this.state.all_testing_data} />
     </Col>
-    <Col sm={{ size: 5, offset: 1 }}>
+    </Row>
+    <Row>
+    <hr/>
+    <br/>
+    <Col sm={{ size: 11, offset: 1 }}>
     <img alt="chart" src="/vaxzones/images/population.png" height="200px" />
     </Col>
     </Row>
-
-        
-      <hr/>
+     <Row>
+     <Col sm={{ size: 11, offset: 1 }}>
+      <div  style={{padding:'20px'}}>
+        <b>Data sources:</b><br/>
+        <a href="https://data.cms.gov/widgets/s2uc-8wxp">Health Care Tracking data</a> <br/>
+        <a href="https://covid19.cloudeya.org"> Covid data by Time</a>
+      </div></Col></Row>
         </div>)
 
 }
